@@ -1,0 +1,42 @@
+﻿@model List<Event>
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h1>List of the events</h1>
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            @foreach(var item in Model)
+            {
+                <div class="col">
+                    @if (item != null)
+                    {
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <p class="card-text">@item.Name</p>
+                                <p class="card-text">@item.DateAndTime</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <form method="post" action="@Url.Action("Index", "Registration")">
+                                        <input type="hidden" name="eventName" value="@item.Name" />
+                                        <input type="hidden" name="eventDateTime" value="@item.DateAndTime" />
+                                        <input type="hidden" name="maxAudienceNumber" value="@item.MaxAudienceNumber" />
+                                        <div class="btn-group">
+                                            <button type="submit" class="btn btn-sm btn-outline-secondary">Register</button>
+                                        </div>
+                                    </form>
+                                    <small class="text-muted">Audience: @item.MaxAudienceNumber</small>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+
+            }
+        </div>
+    </div>
+</div>
